@@ -1,6 +1,8 @@
 class Block:
 
-    def __init__(self, unique_id, hash, parent_hash, transactions):
+    def __init__(
+            self, unique_id, hash,
+            parent_hash, transactions):
         self.unique_id = unique_id
         self.hash = hash
         self.parent_hash = parent_hash

@@ -3,7 +3,9 @@ import hashlib as hashlib
 class Chain:
     last_transaction_number = 0
 
-    def __init__(self, blocs, last_transaction_number):
+    def __init__(
+            self, blocs,
+            last_transaction_number):
         self.blocs = blocs
         self.last_transaction_number = last_transaction_number
 

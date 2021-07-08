@@ -1,25 +1,50 @@
-import uuid as uuid
+import uuid
+import json
 
 class Wallet:
-    def __init__(self, unique_id, balance, history):
-        self.unique_id = unique_id
-        self.balance = balance
-        self.history = history
+    def __init__(
+            self, unique_id,
+            balance, history):
+        self._unique_id = unique_id
+        self._balance = balance
+        self._history = history
 
     def generate_unique_id(self):
-        pass
+        uuid = uuid.uuid4()
+        for wallet in self.load():
+            if wallet.unique_id == self.get_unique_id():
+                self.generate_unique_id()
+        return uuid
 
-    def add_balance(self):
-        pass
+    def add_balance(self, balance):
+        self.balance += balance
 
-    def sub_balance(self):
-        pass
+    def sub_balance(self, balance):
+        self.balance -= balance
 
     def send(self):
         pass
 
     def save(self):
-        pass
+        with open('./content/wallets/{self.unique_id}.json', 'w') as f:
+            data = {
+                "unique_id": self.generate_unique_id(),
+                "balance": self.get_balance(),
+                "history": self.get_history()
+            }
+            json.dump(data, f)
+
 
     def load(self):
-        pass
+        with open('./content/wallets/{self.unique_id}.json') as f:
+            data = json.load(f)
+        return data
+
+    def get_unique_id(self):
+        return  self._unique_id
+
+    def get_balance(self):
+        return self._balance
+
+    def get_history(self):
+        return self._history
