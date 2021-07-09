@@ -1,8 +1,8 @@
 class Transaction:
     def __init__(
-            self, wallet_transmitter,
+            self, wallet_receiver,
             wallet_emitter, mount):
-        self._wallet_transmitter = wallet_transmitter
+        self._wallet_receiver = wallet_receiver
         self._wallet_emitter = wallet_emitter
         self._mount = mount
 
@@ -12,8 +12,8 @@ class Transaction:
     def set_id(self, id):
         self._id = id
 
-    def get_wallet_transmitter(self):
-        return self._wallet_transmitter
+    def get_wallet_receiver(self):
+        return self._wallet_receiver
 
     def get_wallet_emitter(self):
         return self._wallet_emitter

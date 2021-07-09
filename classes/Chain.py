@@ -50,9 +50,7 @@ class Chain:
                 return block
 
     def add_transaction(self, transaction: Transaction):
-        if (not transaction.get_wallet_emitter()
-                and not transaction.get_wallet_transmitter()
-                and not self.verify_balance(transaction)):
+        if (not transaction.get_wallet_emitter() and not transaction.get_wallet_receiver() and not self.verify_balance(transaction)):
             return False
         else:
             if not self.verify_weight(transaction):

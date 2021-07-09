@@ -21,10 +21,11 @@ class Block:
 
     def add_transaction(self, transaction):
         transaction.get_wallet_emitter().set_balance(transaction.get_wallet_emitter().get_balance() - transaction.get_mount())
-        transaction.get_wallet_emitter().set_history("a envoyé : {} COINCOIN à {}".format(transaction.get_mount(),transaction.get_wallet_transmitter().get_unique_id()))
+        transaction.get_wallet_receiver().set_balance(transaction.get_wallet_receiver().get_balance() + transaction.get_mount())
+        transaction.get_wallet_emitter().set_history("a envoyé : {} COINCOIN à {}".format(transaction.get_mount(),transaction.get_wallet_receiver().get_unique_id()))
         self.transactions.append(str(transaction))
         transaction.get_wallet_emitter().save()
-        transaction.get_wallet_transmitter().save()
+        transaction.get_wallet_receiver().save()
         self.save()
 
     def get_transaction(self, transaction_number):
