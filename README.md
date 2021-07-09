@@ -14,7 +14,7 @@ Dans le cadre d'une blockchain, des utilisateurs (Wallet) peuvent être instanci
 
 ## utilisation
 
-Pour créer une transaction vous avez juste besoin d'utiliser la méthode classes/Chain#add_transaction(Transaction(Wallet, Wallet, montant)).
+Pour créer une transaction vous avez juste besoin d'utiliser la méthode classes/Chain#add_transaction(Transaction(Wallet, Wallet, montant)) dans main.py.
 Voici un exemple :
 ```
 wallet1 = Wallet(MAX_TOKEN_NUMBER)
