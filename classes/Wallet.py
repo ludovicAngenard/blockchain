@@ -30,9 +30,9 @@ class Wallet:
         pass
 
     def save(self):
-        with open('./content/wallets/{self.unique_id}.json', 'w') as f:
+        with open("./content/wallets/{}.json".format(self.get_unique_id()), 'w') as f:
             data = {
-                "unique_id": self.generate_unique_id(),
+                "unique_id": self.get_unique_id(),
                 "balance": self.get_balance(),
                 "history": self.get_history()
             }
@@ -40,7 +40,7 @@ class Wallet:
 
 
     def load(self):
-        with open('./content/wallets/{self.unique_id}.json') as f:
+        with open("./content/wallets/{}.json".format(self.get_unique_id())) as f:
             data = json.load(f)
         return data
 
