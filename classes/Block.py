@@ -5,7 +5,7 @@ class Block:
 
     def __init__(
             self, hash, parent_hash,
-            transactions, base_hash = 64):
+            transactions = [], base_hash = 64):
         self._hash = hash
         self._parent_hash = parent_hash
         self._base_hash = base_hash
@@ -20,33 +20,32 @@ class Block:
         else:
             return False
 
-    def add_transaction(self):
-        #wallet emetteur
-        #wallet recepteur
-        #montant
-        pass
+    def add_transaction(self, transaction):
+        self.set_transactions( self.get_transaction().append(transaction))
+        self.save()
 
     def get_transaction(self, transaction_number):
-        #TODO complete this part
-        transaction = transaction_number
-        return transaction
+        for transaction in self.get_transactions():
+            if transaction.get_id() == transaction:
+                return transaction
+        return False
 
     def get_weight(self):
-        weight = os.stat("./content/blocs/{}.json".format(self.get_hash())).st_size
+        weight = os.stat("classes/content/blocs/{}.json".format(self.get_hash())).st_size
         return weight
 
     def save(self):
-        with open("./content/blocs/{}.json".format(self.get_hash()), 'w') as f:
+        with open("classes/content/blocs/{}.json".format(self.get_hash()), 'w+') as f:
             data = {
                 "hash": self.get_hash(),
                 "base_hash": self.get_base_hash(),
                 "parent_hash": self.get_parent_hash(),
-                "base_hash": self.get_transactions(),
+                "transactions": self.get_transactions(),
             }
             json.dump(data, f)
 
     def load(self):
-        with open("./content/blocs/{}.json".format(self.get_hash())) as f:
+        with open("classes/content/blocs/{}.json".format(self.get_hash())) as f:
             data = json.load(f)
         return data
 
