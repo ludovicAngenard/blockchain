@@ -50,7 +50,8 @@ class Chain:
                 return block
 
     def add_transaction(self, transaction: Transaction):
-        if (not transaction.get_wallet_emitter() and not transaction.get_wallet_receiver() and not self.verify_balance(transaction)):
+        if (not transaction.get_wallet_emitter() or not transaction.get_wallet_receiver() or not self.verify_balance(transaction)):
+            print('unknow Wallet or the receiver balance is empty')
             return False
         else:
             if not self.verify_weight(transaction):

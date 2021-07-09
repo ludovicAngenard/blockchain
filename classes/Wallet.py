@@ -38,7 +38,6 @@ class Wallet:
                 "balance": self.get_balance(),
                 "history": self.get_history()
             }
-            print(data)
             json.dump(data, f)
 
 
