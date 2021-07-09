@@ -1,7 +1,7 @@
 import hashlib
 import os
-from Block import Block
-from Transaction import Transaction
+from classes.Block import *
+from classes.Transaction import *
 class Chain:
     last_transaction_number = 0
 
@@ -13,7 +13,6 @@ class Chain:
         new_block.save()
 
     def generate_hash(self):
-        print('search a good hash')
         hash = self.create_hashe()
         return hash
 
@@ -21,6 +20,7 @@ class Chain:
         number = 0
         number_string = str(number)
         number_hashed = hashlib.sha256(number_string.encode()).hexdigest()
+        print('search a good hash')
         while not self.verify_hash(number_hashed):
             number += 1
             number_string = str(number)
@@ -41,6 +41,7 @@ class Chain:
     def add_block(self, hash):
         new_block = Block(hash, self.blocks[-1].get_hash())
         self.blocks.append(new_block)
+        print('create a block')
         new_block.save()
 
     def get_block(self, hash):

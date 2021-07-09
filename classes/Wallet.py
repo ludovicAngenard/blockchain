@@ -6,16 +6,16 @@ class Wallet:
     def __init__(
             self, balance):
         self.generate_unique_id()
-        self._balance = balance
-        self._history = []
+        self.balance = balance
+        self.history = []
 
     def generate_unique_id(self):
-        self._unique_id = uuid.uuid4()
+        self.unique_id = uuid.uuid4()
         for id in Wallet.uuids:
             if id == self.get_unique_id():
                 self.generate_unique_id()
             else:
-                Wallet.uuids.append(self._unique_id)
+                Wallet.uuids.append(self.unique_id)
 
 
     def add_balance(self, balance):
@@ -34,10 +34,11 @@ class Wallet:
     def save(self):
         with open("classes/content/wallets/{}.json".format(self.get_unique_id()), 'w') as f:
             data = {
-                "unique_id": self.get_unique_id(),
+                "unique_id": str(self.get_unique_id()),
                 "balance": self.get_balance(),
                 "history": self.get_history()
             }
+            print(data)
             json.dump(data, f)
 
 
@@ -47,16 +48,16 @@ class Wallet:
         return data
 
     def get_unique_id(self):
-        return  self._unique_id
+        return  self.unique_id
 
     def get_balance(self):
-        return self._balance
+        return self.balance
 
     def get_history(self):
-        return self._history
+        return self.history
 
     def set_balance(self, balance):
-        self._balance = balance
+        self.balance = balance
 
     def set_history(self, history):
-        self._history = history
+        self.history.append(history)
