@@ -6,7 +6,7 @@ Besoin de la bibliothèque :
   * json
   * os
   * hashlib
-Si besoin utilisez la commande `pip install <nom de la bibliothèque>`
+Si besoin utilisez la commande ```pip install <nom de la bibliothèque>```
 
 ## Contenu
 
@@ -16,11 +16,11 @@ Dans le cadre d'une blockchain, des utilisateurs (Wallet) peuvent être instanci
 
 Pour créer une transaction vous avez juste besoin d'utiliser la méthode classes/Chain#add_transaction(Transaction(Wallet, Wallet, montant)).
 Voici un exemple :
-`
+```
 wallet1 = Wallet(MAX_TOKEN_NUMBER)
 wallet2 = Wallet(MAX_TOKEN_NUMBER)
 
 chain = Chain()
 
-chain.add_transaction(Transaction(wallet1,wallet2, 50))` 
+chain.add_transaction(Transaction(wallet1,wallet2, 50))
 
