@@ -2,19 +2,21 @@ import uuid
 import json
 
 class Wallet:
+    uuids = []
     def __init__(
-            self, unique_id,
-            balance, history):
-        self._unique_id = unique_id
+            self, balance):
+        self.generate_unique_id()
         self._balance = balance
-        self._history = history
+        self._history = []
 
     def generate_unique_id(self):
-        uuid = uuid.uuid4()
-        for wallet in self.load():
-            if wallet.unique_id == self.get_unique_id():
+        self._unique_id = uuid.uuid4()
+        for id in Wallet.uuids:
+            if id == self.get_unique_id():
                 self.generate_unique_id()
-        return uuid
+            else:
+                Wallet.uuids.append(self._unique_id)
+
 
     def add_balance(self, balance):
         self.set_balance(
@@ -30,7 +32,7 @@ class Wallet:
         pass
 
     def save(self):
-        with open("./content/wallets/{}.json".format(self.get_unique_id()), 'w') as f:
+        with open("classes/content/wallets/{}.json".format(self.get_unique_id()), 'w') as f:
             data = {
                 "unique_id": self.get_unique_id(),
                 "balance": self.get_balance(),
@@ -40,7 +42,7 @@ class Wallet:
 
 
     def load(self):
-        with open("./content/wallets/{}.json".format(self.get_unique_id())) as f:
+        with open("classes/content/wallets/{}.json".format(self.get_unique_id())) as f:
             data = json.load(f)
         return data
 

@@ -1,15 +1,14 @@
 import json
 import os
-
 class Block:
 
     def __init__(
             self, hash, parent_hash,
-            transactions = [], base_hash = 64):
+            base_hash = 64):
         self._hash = hash
         self._parent_hash = parent_hash
         self._base_hash = base_hash
-        self._transactions = transactions
+        self.transactions = []
 
     def check_hash(self):
         character_number = 0
@@ -21,17 +20,17 @@ class Block:
             return False
 
     def add_transaction(self, transaction):
-        self.set_transactions( self.get_transaction().append(transaction))
+        self.transactions.append(str(transaction))
         self.save()
 
     def get_transaction(self, transaction_number):
-        for transaction in self.get_transactions():
+        for transaction in self.transactions():
             if transaction.get_id() == transaction:
                 return transaction
         return False
 
     def get_weight(self):
-        weight = os.stat("classes/content/blocs/{}.json".format(self.get_hash())).st_size
+        weight = os.path.getsize("classes/content/blocs/{}.json".format(self.get_hash()))
         return weight
 
     def save(self):
@@ -40,7 +39,7 @@ class Block:
                 "hash": self.get_hash(),
                 "base_hash": self.get_base_hash(),
                 "parent_hash": self.get_parent_hash(),
-                "transactions": self.get_transactions(),
+                "transactions": self.transactions,
             }
             json.dump(data, f)
 
@@ -63,9 +62,3 @@ class Block:
 
     def set_base_hash(self, base_hash):
         self._base_hash = base_hash
-
-    def get_transactions(self):
-        return self._transactions
-
-    def set_transactions(self, transactions):
-        self._transactions = transactions
